@@ -1,0 +1,53 @@
+Cofiguration du protocole SSH:
+Switch>enable
+Switch#configure terminal
+Switch(config)#interface vlan 1
+Switch(config-if)#ip address (adresseIP) (masque réseau)
+Switch(config-if)#no shut
+Switch(config-if)#exit
+Switch(config)#ip default-gateway (adresseIPDuRouteurConnecté)
+Switch(config)#ip domain-name (nomDeDomaine)
+Switch(config)#crypto key generate rsa
+How many bits in the modulus [512]: nombreDeBits : 512, 1024, 2048)
+Switch(config)#ip ssh version 2
+Switch(config)#username ADMIN password 1234
+Switch(config)#line vty 0 15
+Switch(config-line)#login local
+Switch(config-line)#transport input ssh
+Switch(config-line)#end
+Switch#copy running-config startup-config
+Switch#show startup-config (vérification de l’enregistrement réussi de la configuration)
+
+
+Configuration d'un Switch ou d'un routeur:
+Switch>enable
+Switch#configure terminal
+Switch#hostname nomDuSwitch
+Switch(config)#line console 0
+Switch(config-line)#password (exempleMotDePasse1)
+Switch(config-line)#login
+Switch(config-line)#exit
+Switch(config)#enable password (exempleMotDePasse2)
+Switch(config)#line vty 0 15
+Switch(config-line)#password (exempleMotDePasse3)
+Switch(config-line)#login
+Switch(config-line)#exit
+Switch(config)#service password-encryption
+Switch(config)#banner MOTD #Si vous n'avez pas les droits administrateurs, cet acces vous est interdit ! Si vous decidez de continuer, vous risquez des poursuites judiciaires.#
+Switch(config)#exit
+Switch#copy running-config startup-config
+Switch#show startup-config (vérification de l’enregistrement réussi de la configuration)
+
+Configuration DHCP:
+Router>enable
+Router#configure terminal
+Router(config)#interface FastEthernet1/0
+Router(config-if)#ip address (adresseIP) (masque réseau)
+Router(config-if)#exit
+Router(config)#ip dhcp pool League_Of_Legend
+Router(dhcp-config)#network (adresseRéseau) (masque réseau)
+Router(dhcp-config)#default-router 1.1.1.1
+Router(dhcp-config)#dns-server 1.1.1.2
+Router(dhcp-config)#end
+Switch#copy running-config startup-config
+Switch#show startup-config (vérification de l’enregistrement réussi de la configuration)
